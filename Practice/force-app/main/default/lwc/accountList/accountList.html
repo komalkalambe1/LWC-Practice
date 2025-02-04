@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Accounts" icon-name="standard:account">
+        <template if:true={accounts}>
+            <lightning-datatable
+                key-field="Id"
+                data={accounts}
+                columns={columns}
+                hide-checkbox-column="true"
+                onrowclick={handleAccountClick}>
+            </lightning-datatable>
+        </template>
+        <template if:true={error}>
+            <p class="slds-text-color_error">{error}</p>
+        </template>
+    </lightning-card>
+
+    <template if:true={selectedAccountId}>
+        <c-opportunity-table account-id={selectedAccountId}></c-opportunity-table>
+    </template>
+</template>

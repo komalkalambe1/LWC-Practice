@@ -1,0 +1,40 @@
+<template>
+    <lightning-card>
+        <P class="slds-p-around_medium">Account Record Id : {recordId}</P>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Stage Name</th>
+                    <th scope="col">Close Date</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={opportunities} for:item="opp">
+                    <tr key={opp.Id}>
+                        <td>
+                            <lightning-button
+                                label={opp.Name}
+                                variant="base"
+                                class="slds-text-link"
+                                data-id={opp.Id}
+                                onclick={handleClick}>
+                            </lightning-button>
+ 
+                        </td>
+                        <td>{opp.StageName}</td>
+                        <td>{opp.CloseDate}</td>
+                        <td>{opp.Amount}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <!-- <template if:true={error}>
+            <c-error-panel message="No opportunities found or an error occurred."></c-error-panel>
+        </template> -->
+    </lightning-card>
+</template>
