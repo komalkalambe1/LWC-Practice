@@ -3,19 +3,16 @@
     <apiVersion>62.0</apiVersion>
     <isExposed>true</isExposed>
     <targets>
+        <target>lightning__FlowScreen</target>
         <target>lightning__AppPage</target>
         <target>lightning__RecordPage</target>
         <target>lightning__HomePage</target>
         <target>lightningCommunity__Page</target>
         <target>lightningCommunity__Default</target>
-         <target>lightning__FlowScreen</target>
-        
-      
     </targets>
-
-   <targetConfigs>
+    <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
-            <property name="recordId" type="String" label="Account Id" role="inputOnly" required="true"/>
+            <property name="selectedAccountId" type="String" label="Selected Account Id" role="outputOnly"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

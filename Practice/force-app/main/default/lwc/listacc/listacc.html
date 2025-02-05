@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Accounts" icon-name="standard:account">
+        <template if:true={accounts.length}>
+            <lightning-datatable
+                key-field="Id"
+                data={paginatedAccounts}
+                columns={columns}
+                hide-checkbox-column
+                onrowaction={handleRowAction}
+            ></lightning-datatable>
+ 
+            <!-- Pagination Controls -->
+            <div class="slds-m-top_medium slds-grid slds-grid_align-center">
+                <lightning-button label="Previous" onclick={previousPage} disabled={isFirstPage}></lightning-button>
+                <span class="slds-m-horizontal_medium">Page {currentPage} of {totalPages}</span>
+                <lightning-button label="Next" onclick={nextPage} disabled={isLastPage}></lightning-button>
+            </div>
+        </template>
+ 
+        <template if:true={error}>
+            <p class="slds-text-color_error">Error fetching accounts: {error.body.message}</p>
+        </template>
+ 
+        <template if:false={accounts.length}>
+            <p>No accounts found.</p>
+        </template>
+    </lightning-card>
+</template>

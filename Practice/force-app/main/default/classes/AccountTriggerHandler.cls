@@ -1,30 +1,25 @@
+//****************************************************************************************************
+// @Name  of the Lwc   : AccountTriggerHandler.cls
+// @Description        : class used for to auto-updates a custom field when an Account’s name is changed
+//                         
+//                         
+// @Author             : Komal
+// @Created Date       : 04/02/2025
+// ********************************************************************************************** 
+//
+
 public with sharing class AccountTriggerHandler {
-    public static void handleNameChange(List<Account> newAccounts, List<Account> oldAccounts) {
+    public static void handleAccountNameChange(List<Account> newAccounts, Map<Id, Account> oldAccountMap) {
         List<Account> accountsToUpdate = new List<Account>();
-        for(Account acc:newAccounts) {
-            if(acc.Name != oldAccounts[0].Name) {
-                acc.Name_Changed__c = true;
+
+        for (Account acc : newAccounts) {
+            Account oldAcc = oldAccountMap.get(acc.Id);
+            if (oldAcc != null && acc.Name != oldAcc.Name) {
+                acc.Name_Changed__c = true; // Mark the custom field as true
                 accountsToUpdate.add(acc);
             }
-           
         }
-        update accountsToUpdate;
-    
-        // List<Account> accountsToUpdate = new List<Account>();
 
-        // for (Integer i = 0; i < newAccounts.size(); i++) {
-        //     Account newAcc = newAccounts[i];
-        //     Account oldAcc = oldAccounts[i];
-            
-        //     // Check if the Name field has been changed
-        //     if (newAcc.Name != oldAcc.Name) {
-        //         newAcc.Name_Changed__c = true;
-        //         accountsToUpdate.add(newAcc);
-        //     }
-        // }
-
-        // if (!accountsToUpdate.isEmpty()) {
-        //     update accountsToUpdate;
-        // }
+        // No DML needed, since we are modifying Trigger.new records
     }
 }
